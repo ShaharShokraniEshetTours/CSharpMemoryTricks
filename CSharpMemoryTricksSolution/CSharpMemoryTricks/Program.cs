@@ -18,9 +18,13 @@ namespace CSharpMemoryTricks
             {
                 MyUnboxing.Run();
             }
-            if (true)
+            if (false)
             {
                 MyBoxing.Run();
+            }
+            if (true)
+            {
+                MyStringConcatination.Run();
             }
         }
 
