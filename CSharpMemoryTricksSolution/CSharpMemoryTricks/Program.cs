@@ -22,9 +22,13 @@ namespace CSharpMemoryTricks
             {
                 MyBoxing.Run();
             }
-            if (true)
+            if (false)
             {
                 MyStringConcatination.Run();
+            }
+            if (true)
+            {
+                MyStruct.Run();
             }
         }
 
