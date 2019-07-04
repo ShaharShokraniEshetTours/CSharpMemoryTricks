@@ -26,9 +26,13 @@ namespace CSharpMemoryTricks
             {
                 MyStringConcatination.Run();
             }
-            if (true)
+            if (false)
             {
                 MyStruct.Run();
+            }
+            if (true)
+            {
+                MyArray.Run();
             }
         }
 
