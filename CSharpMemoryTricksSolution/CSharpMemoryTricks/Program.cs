@@ -2,11 +2,42 @@
 
 namespace CSharpMemoryTricks
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (false)
+            {
+                MyStack.Run();
+            }
+            if (false)
+            {
+                MyHeap.Run();
+            }
+            if (true)
+            {
+                MyUnboxing.Run();
+            }
+        }
+
+
+    }    
+
+    public class MyClass
+    {
+        public void MyMethod()
+        {
+            int count = 0;
+            byte[] buffer = new byte[100];
+            DoSomeAction(count, buffer);
+
+            int a = 1234;
+            object b = a;
+            int c = (int)b;
+        }
+
+        private void DoSomeAction(int count, byte[] buffer)
+        {
         }
     }
 }
