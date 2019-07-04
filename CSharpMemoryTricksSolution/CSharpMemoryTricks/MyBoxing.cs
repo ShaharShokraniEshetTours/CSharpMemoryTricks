@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CSharpMemoryTricks
 {
-    public class MyUnboxing
+    public class MyBoxing
     {
         private const int arraySize = 100000000;
 
         /// <summary>
-        /// Base Measure for increamenting a by 1 for 1,000,000 times without unboxing.
+        /// Base Measure for increamenting a by 1 for 1,000,000 times without boxing.
         /// </summary>
         /// <returns>Elapsed Milliseconds</returns>
         public static long MeasureA()
@@ -23,6 +23,7 @@ namespace CSharpMemoryTricks
             int a = 1;
             for (int i = 0; i < arraySize; i++)
             {
+                DoWithoutBoxing(a);
                 a = a + 1;
             }
 
@@ -31,7 +32,7 @@ namespace CSharpMemoryTricks
         }
 
         /// <summary>
-        /// Base Measure for increamenting a by 1 for 1,000,000 times with unboxing.
+        /// Base Measure for increamenting a by 1 for 1,000,000 times with boxing.
         /// </summary>
         /// <returns>Elapsed Milliseconds</returns>
         public static long MeasureB()
@@ -39,35 +40,43 @@ namespace CSharpMemoryTricks
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            object a = 1;
+            int a = 1;
             for (int i = 0; i < arraySize; i++)
             {
-                a = (int)a + 1;
+                DoBoxing(a);
+                a = a + 1;
             }
 
             stopwatch.Stop();
             return stopwatch.ElapsedMilliseconds;
         }
 
+        private static void DoBoxing(object i)
+        {
+        }
+        private static void DoWithoutBoxing(int i)
+        {
+        }
+
         public static void Run()
         {
             //First run to eliminate any startups overhead.
-            MyUnboxing.MeasureA();
-            MyUnboxing.MeasureB();
+            MyBoxing.MeasureA();
+            MyBoxing.MeasureB();
 
             //Real measurment
-            long intDuration = MyUnboxing.MeasureA();
-            long objDuration = MyUnboxing.MeasureB();
+            long intDuration = MyBoxing.MeasureA();
+            long objDuration = MyBoxing.MeasureB();
 
             //Display the results
-            Debug.WriteLine("No unboxing performance: {0} elapsed milliseconds.", intDuration);
-            Debug.WriteLine("Unboxing performance: {0} elapsed milliseconds.", objDuration);
-            Debug.WriteLine("No unboxing performance is {0} times faster.", objDuration / intDuration);
+            Debug.WriteLine("No boxing performance: {0} elapsed milliseconds.", intDuration);
+            Debug.WriteLine("Boxing performance: {0} elapsed milliseconds.", objDuration);
+            Debug.WriteLine("No boxing performance is {0} times faster.", objDuration / intDuration);
 
             /*
-            No unboxing performance: 185 elapsed milliseconds.
-            Unboxing performance: 618 elapsed milliseconds.
-            No unboxing performance is 3 times faster.
+            No boxing performance: 330 elapsed milliseconds.
+            Boxing performance: 764 elapsed milliseconds.
+            No boxing performance is 2 times faster.
             */
         }
     }

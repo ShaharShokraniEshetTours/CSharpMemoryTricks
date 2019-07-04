@@ -14,9 +14,13 @@ namespace CSharpMemoryTricks
             {
                 MyHeap.Run();
             }
-            if (true)
+            if (false)
             {
                 MyUnboxing.Run();
+            }
+            if (true)
+            {
+                MyBoxing.Run();
             }
         }
 
